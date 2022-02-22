@@ -3,7 +3,7 @@ import FeedbackItem from './FeedbackItem';
 import PropTypes from 'prop-types'
 
 
-function FeedbackList({ data }) {
+function FeedbackList({ data, handleDelete }) {
 
   // This is in case we have no data as our default state
   if (!data || data.length === 0) {
@@ -14,7 +14,7 @@ function FeedbackList({ data }) {
     <div className='feedback-list'>
       {
         data.map((item) => (
-          <FeedbackItem key={item.id} item={item}  />
+          <FeedbackItem key={item.id} item={item} handleDelete={handleDelete} />
         ))
       }
     </div>
