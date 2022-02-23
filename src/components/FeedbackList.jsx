@@ -7,7 +7,7 @@ function FeedbackList({ data, handleDelete }) {
 
   // This is in case we have no data as our default state
   if (!data || data.length === 0) {
-    return <p>Sorry, we dont have any feedback as of yet.</p>
+    return <p>Sorry, we dont have any ratings as of yet.</p>
   }
 
   return (
