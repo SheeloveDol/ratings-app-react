@@ -2,10 +2,12 @@ import React from 'react'
 import Card from './shared/Card'
 import { useState } from 'react'
 import Button from './shared/Button'
+import RatingSelect from './RatingSelect'
 
 function FeedbackForm() {
   // Creating a default state for our form
   const [texts, setTexts] = useState('')
+  const [rating, setRating] = useState(10)
   const [btnDisabled, setBtnDisabled] = useState(true)
   const [message, setMessage] = useState('')
 
@@ -30,8 +32,8 @@ function FeedbackForm() {
   return (
     <Card>
       <form>
-        <h2>Please let know how you how we can better service you.</h2>
-        {/* ToDo --- rating select component */}
+        <h2>Please let us know how you how we can better service you.</h2>
+        <RatingSelect select={(rating) => setRating(rating)} />
         <div className="input-group">
           <input type="text" placeholder='Leave a review...' onChange={handleTextChange} value={texts} />
           <Button type='submit' isDisabled={btnDisabled} >Submit</Button>
