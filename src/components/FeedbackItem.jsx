@@ -26,7 +26,7 @@ function FeedbackItem({ item, handleDelete }) {
 
 // Setting propTypes for FeedbackItem
 FeedbackItem.propTypes = {
-  item: PropTypes.object,
+  item: PropTypes.object, 
 }
 
 export default FeedbackItem
