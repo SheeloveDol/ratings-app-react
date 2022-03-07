@@ -3,8 +3,12 @@ import Card from './shared/Card'
 import { useState } from 'react'
 import Button from './shared/Button'
 import RatingSelect from './RatingSelect'
+import { useContext } from 'react'
+import FeedbackContext from '../context/FeedbackContext'
 
-    function FeedbackForm({ handleAdd }) {
+    function FeedbackForm() {
+        
+    
 
         // Creating a default state for our form
         const [texts, setTexts] = useState('')
@@ -12,6 +16,7 @@ import RatingSelect from './RatingSelect'
         const [btnDisabled, setBtnDisabled] = useState(true)
         const [message, setMessage] = useState('')
 
+        const { addFeedback } = useContext(FeedbackContext)
         // This function allows up to capture the changes in our input field and set it as the new state()
         const handleTextChange = (e) => {
             
@@ -39,7 +44,7 @@ import RatingSelect from './RatingSelect'
                     text: texts,
                     rating,
                 }
-            handleAdd(newFeedback)
+            addFeedback(newFeedback)
 
             // To clear textfield after submission
             setTexts('')
