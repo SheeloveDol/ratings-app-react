@@ -1,29 +1,30 @@
 import { createContext, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import FeedbackData from '../data/FeedbackData'
 
 const FeedbackContext = createContext()
 
 // need to create a 'provider' to wrap components in App.js
 export const FeedbackProvider = ({ children }) => {
     // setting our state
-    const [feedback, setFeedback] = useState([
-        {
-            id: 1,
-            text: 'This is the first item from context',
-            rating: 9
-        },
-        {
-            id: 2,
-            text: 'This is the second item from context',
-            rating: 10
-        },
-        {
-            id: 3,
-            text: 'This is the third item from context',
-            rating: 7
-        }
-    ])
+    const [feedback, setFeedback] = useState(FeedbackData)
 
+    // Setting up the 'edit' state
+    const [feedbackEdit, setFeedbackEdit] = useState({
+        item: {},
+        edit: false
+    })
+
+
+    // Function to edit feedback
+    const editFeedback = (item) => {
+        setFeedbackEdit({
+            item,
+            edit: true
+        })
+    }
+
+    // Function to delete an item
     const deleteFeedback = (id) => {
         // Creating a warning popup to confirm delete action
         if (window.confirm('Do you want to delete this feedback forever?')) {
@@ -32,10 +33,20 @@ export const FeedbackProvider = ({ children }) => {
         
     }
 
+
+    // Function to add an item
     const addFeedback = (newFeedback) => {
         // uuidv4() as a unique id to the user created feedbacks
         newFeedback.id = uuidv4()
-        setFeedback([ newFeedback, ...feedback])
+        setFeedback([ newFeedback, ...feedback ])
+    }
+
+
+    // Function to update an item
+    const updateFeedback = (id, updatedItem) => {
+        setFeedback(
+            feedback.map((item) => (item.id === id ? { ...item, ...updatedItem } : item))
+        )
     }
 
 
@@ -43,8 +54,12 @@ export const FeedbackProvider = ({ children }) => {
     return <FeedbackContext.Provider 
     value={{ 
         feedback, 
+        feedbackEdit,
         deleteFeedback,
         addFeedback,
+        editFeedback,
+        updateFeedback,
+        
     }}>
         {children}
     </FeedbackContext.Provider>

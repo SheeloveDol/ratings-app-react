@@ -36,7 +36,8 @@ function App() {
                                 <FeedbackList  />
                             </>
                         }
-                        ></Route>
+                        >
+                        </Route>
             
                         <Route path='/about' element={<AboutPage/>} />
                     </Routes>
@@ -47,4 +48,4 @@ function App() {
     )
 }
 
-export default App 
+export default App

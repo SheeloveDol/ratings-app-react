@@ -1,6 +1,6 @@
 import React from 'react'
 import Card from './shared/Card'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Button from './shared/Button'
 import RatingSelect from './RatingSelect'
 import { useContext } from 'react'
@@ -16,7 +16,19 @@ import FeedbackContext from '../context/FeedbackContext'
         const [btnDisabled, setBtnDisabled] = useState(true)
         const [message, setMessage] = useState('')
 
-        const { addFeedback } = useContext(FeedbackContext)
+        const { addFeedback, feedbackEdit, updateFeedback } = useContext(FeedbackContext)
+
+        useEffect(() => {
+            if (feedbackEdit.edit === true) {
+                setBtnDisabled(false)
+                setTexts(feedbackEdit.item.text)
+                setRating(feedbackEdit.item.rating)
+            }
+        }, [feedbackEdit])
+
+
+
+
         // This function allows up to capture the changes in our input field and set it as the new state()
         const handleTextChange = (e) => {
             
@@ -44,7 +56,12 @@ import FeedbackContext from '../context/FeedbackContext'
                     text: texts,
                     rating,
                 }
-            addFeedback(newFeedback)
+                if (feedbackEdit.edit === true) {
+                    updateFeedback(feedbackEdit.item.id, newFeedback)
+                } else {
+                    addFeedback(newFeedback)
+                }
+                
 
             // To clear textfield after submission
             setTexts('')

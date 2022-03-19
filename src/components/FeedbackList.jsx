@@ -34,7 +34,6 @@ function FeedbackList() {
   )
 }
 
-// Setting propTypes for FeedbackList with the shape of the array included
 
 
 export default FeedbackList 
